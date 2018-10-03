@@ -69,6 +69,12 @@ public:
         }
     }
 
+    ~Item() {
+        if (m_next != nullptr) {
+            delete m_next;
+        }
+    }
+
     void InsertItem(Item* item) {
         Item* next = m_next;
         m_next = item;
