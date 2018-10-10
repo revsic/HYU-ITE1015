@@ -51,7 +51,7 @@ Slice split(const std::string& inp, const std::string& delim) {
 
 class Item {
 public:
-    Item() : m_age(0), m_id(0), m_numSubjects(0), m_next(nullptr) {
+    Item() : m_age(0), m_numSubjects(0), m_next(nullptr) {
         // Do Nothing
     }
 
@@ -60,8 +60,8 @@ public:
         Slice subjects = split(result[3], ",");
         
         m_name = result[0];
+        m_id = result[2];
         m_age = std::atoi(result[1].c_str());
-        m_id = std::atoi(result[2].c_str());
         m_numSubjects = subjects.size();
 
         for (size_t i = 0; i < m_numSubjects; ++i) {
@@ -97,7 +97,7 @@ public:
         return m_name;
     }
 
-    int GetID() const {
+    const std::string& GetID() const {
         return m_id;
     }
 
@@ -107,8 +107,8 @@ public:
 
 private:
     std::string m_name;
+    std::string m_id;
     int m_age;
-    int m_id;
 
     size_t m_numSubjects;
     std::string m_subjects[10];
@@ -133,8 +133,8 @@ int main() {
 
     Item* head = head_.GetNextNode();
     while (head != nullptr) {
-        int id = head->GetID();
-        if (id >= 20130000 && id < 20140000) {
+        const std::string& id = head->GetID();
+        if (id.substr(0, 4) == "2013") {
             std::cout << head->GetName() << '(' << id << ") : ";
             head->PrintSubjects();
             std::cout << std::endl;
