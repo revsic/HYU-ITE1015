@@ -1,0 +1,1 @@
+add_executable(magic_square main.cc magic_square.cc)
