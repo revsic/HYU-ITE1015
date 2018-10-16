@@ -45,8 +45,8 @@ int Manager::GetSize() const {
     return m_size;
 }
 
-const Account& Manager::operator[](size_t size) const {
-    return m_accounts[size];
+std::string Manager::Log(int id) const {
+    return m_accounts[id].Log();
 }
 
 int Manager::NewAccount() {

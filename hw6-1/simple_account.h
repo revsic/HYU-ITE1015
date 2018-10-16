@@ -21,9 +21,9 @@ private:
 class Manager {
 public:
     Manager();
+    
     int GetSize() const;
-
-    const Account& operator[](size_t size) const;
+    std::string Log(int id) const;
 
     int NewAccount();
     int Deposit(int id, int money);

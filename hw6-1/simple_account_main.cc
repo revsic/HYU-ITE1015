@@ -31,12 +31,12 @@ int main() {
             stream << "Account for user " << id << " registered";
 
             log(stream.str(), manager.NewAccount());
-            std::cout << manager[id].Log() << std::endl;
+            std::cout << manager.Log(id) << std::endl;
             break;
         }
         case 'D': {
-            int idx = 0, money = 0;
-            std::cin >> idx >> money;
+            int id = 0, money = 0;
+            std::cin >> id >> money;
 
             if (manager.GetSize() == 0) {
                 no_account();
@@ -44,15 +44,15 @@ int main() {
             }
 
             std::stringstream stream;
-            stream << "Deposit to user " << idx << ' ' << money;
+            stream << "Deposit to user " << id << ' ' << money;
 
-            log(stream.str(), manager.Deposit(idx, money));
-            std::cout << manager[idx].Log() << std::endl;
+            log(stream.str(), manager.Deposit(id, money));
+            std::cout << manager.Log(id) << std::endl;
             break;
         }
         case 'W': {
-            int idx = 0, money = 0;
-            std::cin >> idx >> money;
+            int id = 0, money = 0;
+            std::cin >> id >> money;
 
             if (manager.GetSize() == 0) {
                 no_account();
@@ -60,10 +60,10 @@ int main() {
             }
 
             std::stringstream stream;
-            stream << "Withdraw from user " << idx << ' ' << money;
+            stream << "Withdraw from user " << id << ' ' << money;
 
-            log(stream.str(), manager.Withdraw(idx, money));
-            std::cout << manager[idx].Log() << std::endl;
+            log(stream.str(), manager.Withdraw(id, money));
+            std::cout << manager.Log(id) << std::endl;
             break;
         }
         case 'T': {
@@ -82,8 +82,8 @@ int main() {
             if (src > dst) {
                 std::swap(src, dst);
             }
-            std::cout << manager[src].Log() << std::endl;
-            std::cout << manager[dst].Log() << std::endl;
+            std::cout << manager.Log(src) << std::endl;
+            std::cout << manager.Log(dst) << std::endl;
             break;
         }
         case 'Q':
