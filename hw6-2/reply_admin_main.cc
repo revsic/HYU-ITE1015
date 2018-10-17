@@ -14,12 +14,15 @@ bool remove(ReplyAdmin& admin, const std::string& input) {
         return admin.removeChat(start, end);
     }
     
-    std::regex neg_multi("#remove\\s*-([0-9]+)-([0-9]+)");
-    if (std::regex_search(input, match, neg_multi) && match.size() >= 3) {
-        int start = -std::stoi(match.str(1));
-        int end = std::stoi(match.str(2));
+    std::regex neg_multi("#remove\\s*-[0-9]+-([0-9]+)");
+    if (std::regex_search(input, match, neg_multi) && match.size() >= 2) {
+        int end = std::stoi(match.str(1));
+        return admin.removeChat(0, end);
+    }
 
-        return admin.removeChat(start, end);
+    std::regex neg_neg("#remove\\s*-[0-9]+--[0-9]+");
+    if (std::regex_search(input, match, neg_neg) && match.size() >= 1) {
+        return admin.removeChat(0);
     }
 
     std::regex remove("#remove\\s*([0-9]+)");
