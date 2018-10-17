@@ -47,7 +47,14 @@ bool ReplyAdmin::removeChat(int index) {
 }
 
 bool ReplyAdmin::removeChat(int start, int end) {
-    if (start < 0 || end >= m_size) {
+    if (start < 0) {
+        start = 0;
+    }
+    if (end >= m_size) {
+        end = m_size - 1;
+    }
+
+    if (start > end) {
         return false;
     }
 
