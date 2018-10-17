@@ -4,6 +4,32 @@
 #include <regex>
 #include <string>
 
+bool remove(ReplyAdmin& admin, const std::string& input) {
+    std::smatch match;
+    std::regex multi_remove("#remove\\s*([0-9]+)-([0-9]+)");
+    if (std::regex_search(input, match, multi_remove) && match.size() >= 3) {
+        int start = std::stoi(match.str(1));
+        int end = std::stoi(match.str(2));
+
+        return admin.removeChat(start, end);
+    }
+    
+    std::regex neg_multi("#remove\\s*-([0-9]+)-([0-9]+)");
+    if (std::regex_search(input, match, neg_multi) && match.size() >= 3) {
+        int start = -std::stoi(match.str(1));
+        int end = std::stoi(match.str(2));
+
+        return admin.removeChat(start, end);
+    }
+
+    std::regex remove("#remove\\s*([0-9]+)");
+    if (std::regex_search(input, match, remove) && match.size() >= 2) {
+        int index = std::stoi(match.str(1));
+        return admin.removeChat(index);
+    }
+    return false;
+}
+
 int main() {
     ReplyAdmin admin;
     std::string input;
@@ -14,25 +40,8 @@ int main() {
             break;
         }
         else if (input.find("#remove") != std::string::npos) {
-            std::smatch match;
-            std::regex multi_remove("#remove\\s*([0-9]+)-([0-9]+)");
-            if (std::regex_search(input, match, multi_remove) && match.size() >= 3) {
-                int start = std::stoi(match.str(1));
-                int end = std::stoi(match.str(2));
-
-                if (admin.removeChat(start, end)) {
-                    admin.log();
-                }
-                continue;
-            }
-
-            std::regex remove("#remove\\s*([0-9]+)");
-            if (std::regex_search(input, match, remove) && match.size() >= 2) {
-                int index = std::stoi(match.str(1));
-                
-                if (admin.removeChat(index)) {
-                    admin.log();
-                }
+            if(remove(admin, input)) {
+                admin.log();
             }
         }
         else {
