@@ -30,6 +30,16 @@ int main() {
         if (stream.fail()) {
             break;
         }
+        
+        std::string dummy;
+        stream >> dummy;
+        
+        if (!dummy.empty()
+            || hp1 < 0 || power1 < 0
+            || hp2 < 0 || power2 < 0)
+        {
+            break;
+        }
 
         MinimalFighter fighter1(hp1, power1);
         MinimalFighter fighter2(hp2, power2);
