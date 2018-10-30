@@ -1,4 +1,5 @@
 #include "integer_set.h"
+#include <algorithm>
 
 IntegerSet::IntegerSet() {
     // Do Nothing
