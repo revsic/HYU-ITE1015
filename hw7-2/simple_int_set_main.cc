@@ -12,27 +12,6 @@ void log_set(const std::set<int>& int_set) {
     std::cout << '}' << std::endl;
 }
 
-std::set<int> input_set(std::istream& input_stream) {
-    std::string given;
-    input_stream >> given;
-    
-    std::set<int> int_set;
-    while (true) {
-        int num = 0;
-        input_stream >> num;
-
-        if (input_stream.fail()) {
-            break;
-        }
-        int_set.emplace(num);
-    }
-
-    input_stream.clear();
-    input_stream >> given;
-
-    return int_set;
-}
-
 using SetOper = std::set<int>(*)(const std::set<int>&, const std::set<int>&);
 
 int main() {
@@ -51,11 +30,19 @@ int main() {
         }
 
         std::stringstream sstream(given);
-        std::set<int> set1 = input_set(sstream);
+        
+        std::set<int> set1; 
+        if (!InputSet(sstream, set1)) {
+            continue;
+        }
 
         char oper = '\0';
         sstream >> oper;
-        std::set<int> set2 = input_set(sstream);
+
+        std::set<int> set2;
+        if (!InputSet(sstream, set2)) {
+            continue;
+        }
       
         auto iter = opers.find(oper);
         if (iter != opers.end()) {

@@ -35,3 +35,34 @@ std::set<int> SetDifference(const std::set<int>& set0, const std::set<int>& set1
     
     return difference;
 }
+
+bool InputSet(std::istream& input_stream, std::set<int>& s) {
+    std::set<int> backup(s);
+
+    std::string given;
+    input_stream >> given;
+
+    if (given != "{") {
+        return false;
+    }
+
+    while (true) {
+        int num = 0;
+        input_stream >> num;
+
+        if (input_stream.fail()) {
+            break;
+        }
+        s.emplace(num);
+    }
+
+    input_stream.clear();
+    input_stream >> given;
+
+    if (given != "}") {
+        s = std::move(backup);
+        return false;
+    }
+
+    return true;
+}
