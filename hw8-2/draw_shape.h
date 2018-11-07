@@ -8,8 +8,8 @@ public:
     Canvas();
     ~Canvas();
     
-    bool fill(size_t row, size_t col);
-    std::string Draw(char brush) const;
+    bool Fill(size_t row, size_t col);
+    std::string Make(char brush) const;
 
     static void SetCanvas(size_t width, size_t height);
 

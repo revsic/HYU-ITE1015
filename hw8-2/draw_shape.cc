@@ -31,7 +31,7 @@ Canvas::~Canvas() {
     }
 }
 
-bool Canvas::fill(size_t row, size_t col) {
+bool Canvas::Fill(size_t row, size_t col) {
     if (row < m_height && col < m_width) {
         m_canv[row][col] = true;
         return true;
@@ -39,7 +39,7 @@ bool Canvas::fill(size_t row, size_t col) {
     return false;
 }
 
-std::string Canvas::Draw(char brush) const {
+std::string Canvas::Make(char brush) const {
     std::ostringstream oss;
 
     int plc_width = std::log10(m_width - 1) + 1;
@@ -84,7 +84,7 @@ Canvas Rectangle::Draw(size_t pos_x, size_t pos_y) const {
     Canvas canvas;
     for (size_t i = pos_y; i < pos_y + m_height; ++i) {
         for (size_t j = pos_x; j < pos_x + m_width; ++j) {
-            if (!canvas.fill(i , j)) {
+            if (!canvas.Fill(i , j)) {
                 break;
             }
         }
@@ -108,7 +108,7 @@ Canvas Square::Draw(size_t pos_x, size_t pos_y) const {
     Canvas canvas;
     for (size_t i = pos_y; i < pos_y + m_size; ++i) {
         for (size_t j = pos_x; j < pos_x + m_size; ++j) {
-            if (!canvas.fill(i , j)) {
+            if (!canvas.Fill(i , j)) {
                 break;
             }
         }
@@ -134,16 +134,16 @@ Canvas Diamond::Draw(size_t pos_x, size_t pos_y) const {
 
     for (size_t i = 0; i < m_dist; ++i) {
         for (size_t j = 0; j <= i; ++j) {
-            canvas.fill(pos_y + i, pos_x + j);
-            canvas.fill(pos_y + i, pos_x - j);
+            canvas.Fill(pos_y + i, pos_x + j);
+            canvas.Fill(pos_y + i, pos_x - j);
         }
     }
 
     size_t base = 2 * m_dist + pos_y;
     for (int i = m_dist; i >= 0; --i) {
         for (size_t j = 0; j <= i; ++j) {
-            canvas.fill(base - i, pos_x + j);
-            canvas.fill(base - i, pos_x - j);
+            canvas.Fill(base - i, pos_x + j);
+            canvas.Fill(base - i, pos_x - j);
         }
     }
     

@@ -42,9 +42,9 @@ int main() {
 
         std::cout << "Area: " << shape->GetArea() << '\n'
                   << "Perimeter: " << shape->GetPerimeter() << '\n'
-                  << shape->Draw(pos_x, pos_y)
-                           .Draw(brush) 
+                  << shape->Draw(pos_x, pos_y).Make(brush) 
                   << std::endl;
+        delete shape;
     }
     return 0;
 }
