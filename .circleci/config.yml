@@ -1,0 +1,25 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+    steps:
+      - checkout
+      - run:
+          name: g++ version check
+          command: echo `g++ --version`
+      - run:
+          name: make all
+          command: |
+            for dirname in hw*; do
+              cd $dirname;
+              if [ -f "Makefile" ];
+                make;
+              else;
+                mkdir build;
+                pushd build;
+                cmake ..;
+                make;
+                popd;
+              fi;
+            done;
