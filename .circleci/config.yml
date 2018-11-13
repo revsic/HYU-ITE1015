@@ -15,7 +15,7 @@ jobs:
               cd $dirname;
               if [ -f "Makefile" ];
                 make;
-              else;
+              else
                 mkdir build;
                 pushd build;
                 cmake ..;
