@@ -13,7 +13,7 @@ jobs:
           command: |
             for dirname in hw*; do
               cd $dirname;
-              if [ -f "Makefile" ];
+              if [ -f "Makefile" ]; then
                 make;
               else
                 mkdir build;
