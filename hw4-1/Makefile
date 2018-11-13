@@ -1,7 +1,7 @@
 all: string function_overloading dynamic_array
 
 string: string.cc
-	g++ -o string string.cc
+	g++ -o string string.cc --std=c++11
 
 function_overloading: function_overloading.cc
 	g++ -o function_overloading function_overloading.cc
