@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <iostream>
 
 void rotateLeft(int* pa, int* pb, int* pc) {
