@@ -22,4 +22,5 @@ jobs:
                 make;
                 popd;
               fi;
+              cd ..;
             done;
