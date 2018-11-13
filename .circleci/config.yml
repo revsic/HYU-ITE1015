@@ -12,6 +12,7 @@ jobs:
           name: make all
           command: |
             for dirname in hw*; do
+              echo $dirname;
               cd $dirname;
               if [ -f "Makefile" ]; then
                 make;
