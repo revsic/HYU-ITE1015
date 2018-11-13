@@ -7,7 +7,10 @@ jobs:
       - checkout
       - run:
           name: install cmake
-          command: apt-get update && apt-get install cmake
+          command: apt-get update && apt-get install -y cmake
+      - run:
+          name: install g++
+          command: apt-get update && apt-get install -y g++
       - run:
           name: g++ version check
           command: echo `g++ --version`
