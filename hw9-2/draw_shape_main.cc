@@ -47,7 +47,9 @@ int main() {
             std::cin >> idx;
             
             if (idx < shapes.size()) {
-                shapes.erase(shapes.begin() + idx);
+                auto iter = shapes.begin() + idx;
+                delete *iter;
+                shapes.erase(iter);
             }
         }
         else if (given == "draw") {
