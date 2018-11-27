@@ -26,8 +26,7 @@ void Canvas::Resize(size_t w, size_t h) {
 }
 
 bool Canvas::DrawPixel(size_t y, size_t x, char brush) {
-    auto valid = [](size_t n, size_t limit) { return n >= 0 && n < limit; };
-    if (valid(x, m_col) && valid(y, m_row)) {
+    if (y < m_row && x < m_col) {
         m_pixels[y][x] = brush;
         return true;
     }
