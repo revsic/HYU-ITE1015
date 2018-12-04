@@ -2,7 +2,9 @@
 
 template <typename T>
 void myswap(T& a, T& b) {
-    std::swap(a, b);
+    T c = a;
+	a = b;
+	b = c;
 }
 
 int main() {
