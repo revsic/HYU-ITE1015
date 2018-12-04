@@ -25,9 +25,12 @@ public:
     }
 
     void clear() {
-        for (size_t i = 0; i < n_element; ++i) {
-            obj_arr[i] = T();
+        if (is_allocated) {
+            delete[] obj_arr;
         }
+        obj_arr = nullptr;
+        n_element = 0;
+        is_allocated = false;
     }
 
     size_t size() const {
