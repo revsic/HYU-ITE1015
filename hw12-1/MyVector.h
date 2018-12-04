@@ -3,6 +3,8 @@
 
 #include "MyContainer.h"
 
+#include <stdexcept>
+
 template <typename T>
 class MyVector : public MyContainer<T> {
 public:
@@ -20,6 +22,16 @@ public:
 
     MyVector(T* arr, size_t n) : MyContainer<T>(arr, n), capacity(n) {
         // DO Nothing
+    }
+
+    MyVector(MyVector const& vec) : MyVector(vec.n_element) {
+        for (size_t i = 0; i < vec.n_element; ++i) {
+            obj_arr[i] = vec.obj_arr[i];
+        }
+    }
+
+    void clear() {
+        MyContainer<T>::clear();
     }
 
     bool empty() const {
@@ -73,7 +85,10 @@ public:
     }
 
     T& at(size_t idx) {
-        return obj_arr[idx];
+        if (idx < n_element) {
+            return obj_arr[idx];
+        }
+//        throw std::out_of_range("MyVector::at index out of range");
     }
 
     T& operator[](size_t idx) {
