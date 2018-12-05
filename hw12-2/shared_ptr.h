@@ -30,12 +30,8 @@ public:
 
     My_shared_ptr& operator=(My_shared_ptr const& rhs) {
         if (m_obj == nullptr || count == nullptr) {
-            if (m_obj != nullptr) {
-                delete m_obj;
-            }
-            if (count != nullptr) {
-                delete count;
-            }
+            delete m_obj;
+            delete count;
         } else {
             *count -= 1;
             if (*count <= 0) {
