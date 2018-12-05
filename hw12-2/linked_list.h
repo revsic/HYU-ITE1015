@@ -33,8 +33,7 @@ public:
             Node<T>* ptr = nullptr;
             while (n_nodes--) {
                 if (ptr) {
-                    ptr->next = new Node<T>(*arr++);
-                    ptr = ptr->next;
+                    ptr = ptr->next = new Node<T>(*arr++);
                 }
                 else {
                     head = ptr = new Node<T>(*arr++);
@@ -48,8 +47,7 @@ public:
         Node<T>* rhs_ptr = rhs.head;
         while (rhs_ptr) {
             if (ptr) {
-                ptr->next = new Node<T>(rhs_ptr->data);
-                ptr = ptr->next;
+                ptr = ptr->next = new Node<T>(rhs_ptr->data);
             } else {
                 head = ptr = new Node<T>(rhs_ptr->data);
             }
@@ -63,8 +61,7 @@ public:
         Node<T>* rhs_ptr = rhs.head;
         while (rhs_ptr) {
             if (ptr) {
-                ptr->next = new Node<T>(rhs_ptr->data);
-                ptr = ptr->next;
+                ptr = ptr->next = new Node<T>(rhs_ptr->data);
             } else {
                 head = ptr = new Node<T>(rhs_ptr->data);
             }
@@ -89,9 +86,8 @@ public:
                 now = now->next;
             }
             if (idx > 0) return;
-
-            prev->next = new Node<T>(data);
-            prev->next->next = now;
+            
+            prev->next = new Node<T>(data, now);
         } else {
             push_front(data);
         }
@@ -106,9 +102,9 @@ public:
 
             if (idx > 0) return;
 
-            Node<T>* next = now->next->next;
-            delete now->next;
-            now->next = next;
+            Node<T>* next_node = now->next;
+            now->next = next_node->next;
+            delete next_node;
         } else {
             pop_front();
         }
